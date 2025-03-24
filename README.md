@@ -1,33 +1,69 @@
-# merkle-hash-function
+# Custom Merkle–Damgård Hash Function
 
-Sample algorithm implementing Merkle–Damgård hash function for teaching purposes.
+This project showcases two Java implementations of a custom Merkle–Damgård-style hash function. 
+It highlights core cryptographic concepts such as compression functions, diffusion analysis, and the use of Initialization Vectors (IVs). 
+The implementations demonstrate both string-based and file-based hashing with basic diffusion visualization.
+
+## Features
+
+- Custom Merkle–Damgård hash construction
+- Two implementations:
+  - `HashApp.java`: Hashes binary strings and visualizes diffusion
+  - `HashFileApp.java`: Hashes file content with SHA-1-like block and digest size (160 bits)
+- Compression function combining:
+  - Bitwise rotation
+  - XOR operation
+  - Byte addition
+- Random IV generation using `SecureRandom`
+- Diffusion analysis: bitwise comparison of similar inputs and their resulting digests
+
+## Project Structure
+
+```
+src/
+├── es/usj/crypto/
+├── HashApp.java       # Binary-string input hash test with diffusion metrics
+└── HashFileApp.java   # File-based hashing with a 160-bit custom function
+```
 
 ## Requirements
 
-* Java 11
-* Maven 3.5
+- Java 17 or higher
+- No external dependencies
 
-## Building
+## How to Run
 
-```
-$ mvn clean package
-```
+1. Compile the classes
 
-## Running
+   ```bash
+   javac es/usj/crypto/*.java
+   ```
 
-Binary hashing
+2. Run HashApp
 
-```
-$ java -cp target/classes es.usj.crypto.HashApp
+   ```bash
+   java es.usj.crypto.HashApp
+   ```
 
-Message: 01111010011111110100101111111011
-Digest:  11001110
-```
+3. Run HashFileApp (file-based hashing)
 
-File hashing
+   > Update the `inputFile` variable in `HashFileApp.java` to point to a valid file on your machine before compiling.
 
-```
-$ java -cp target/classes es.usj.crypto.HashFileApp
+   ```java
+   private static final String inputFile = "/path/to/your/file.pdf";
+   ```
 
-deb4d93ca94f7ec3d2d5e86f46f17d4be889023f
-```
+   Then:
+
+   ```bash
+   java es.usj.crypto.HashFileApp
+   ```
+
+## Educational Goals
+
+This project is ideal for teaching and understanding:
+
+- The structure and flow of iterative hash functions
+- The role of padding and message length encoding
+- Importance of bit-level diffusion in cryptographic security
+- Simple cryptographic operations in Java without external libraries
